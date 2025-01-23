@@ -1,18 +1,32 @@
 #Question 1
-bacterial_growth <- function(x, n, k){
-  if(!is.integer(x) | !is.integer(n) | !is.integer(k)) {
-    return(NA)
-    }
+
+# x = initial population size
+# n = number of generations
+# k = growth factor
+bacterial_growth <- function(x, n, k) {
   
+  # Check if all inputs (x, n, k) are integers; if not, return NA
+  if(!is.integer(x) | !is.integer(n) | !is.integer(k)) {
+    return(NA)  # Exit the function and return NA if any input is invalid
+  }
+  
+  # Initialize an empty numeric vector to store population size per generation
   Pop_Per_gen <- as.numeric(c())
+  
+  # Set the population size for the first generation as the initial population (x)
   Pop_Per_gen[1] <- x
   
-  for(m in 2:n){
+  # Loop through generations 2 to n to calculate population size
+  for(m in 2:n) {
+    # The population size for generation m is calculated as:
+    # previous generation's population squared, multiplied by the growth factor (k)
     Pop_Per_gen[m] <- k * Pop_Per_gen[m-1]^2
-    # 
   }
+  
+  # Return the vector containing the population sizes for all generations
   return(Pop_Per_gen)
 }
+
 
 # Test the function with the following parameters:
 bacterial_growth(as.integer(20), as.integer(4), as.integer(6))
