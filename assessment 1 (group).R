@@ -1,35 +1,21 @@
-#question 1
-rm(list = ls())
-
-# Define a function named 'bacterial_growth' that takes three parameters: x, n, and k.
-bacterial_growth <- function(x, n, k) {
-  
-  # Check if all the inputs (x, n, k) are integers. 
-  # If any of them is not an integer, return NA (missing value).
-  if (!is.integer(x) | !is.integer(n) | !is.integer(k)) {
+#Question 1
+bacterial_growth <- function(x, n, k){
+  if(!is.integer(x) | !is.integer(n) | !is.integer(k)) {
     return(NA)
+    }
+  
+  Pop_Per_gen <- as.numeric(c())
+  Pop_Per_gen[1] <- x
+  
+  for(m in 2:n){
+    Pop_Per_gen[m] <- k * Pop_Per_gen[m-1]^2
+    # 
   }
-  
-  # Create an empty integer vector called 'populationSize' to store population sizes.
-  populationSize <- as.integer(c())
-  
-  # Set the first element of 'populationSize' to the initial population size (x).
-  populationSize[1] <- x
-  
-  # Start a loop from the second generation (index 2) up to the nth generation.
-  for (i in 2:n) {
-    
-    # Calculate the population size for the current generation using the formula:
-    # k * (population size from the previous generation squared).
-    populationSize[i] <- k * (populationSize[i - 1]^2)
-  }
-  
-  # Return the vector 'populationSize' containing the population sizes for all generations.
-  return(populationSize)
+  return(Pop_Per_gen)
 }
 
 # Test the function with the following parameters:
-bacterial_growth(as.integer(1), as.integer(5), as.integer(2))
+bacterial_growth(as.integer(20), as.integer(4), as.integer(6))
 bacterial_growth(as.integer(2), as.integer(7), as.integer(4))
 bacterial_growth(as.integer(1), as.integer(4), as.integer(6))
 bacterial_growth(as.integer(2), as.integer(6), as.integer(8))
